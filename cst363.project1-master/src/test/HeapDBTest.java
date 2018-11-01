@@ -29,7 +29,7 @@ class HeapDBTest {
 	
 	static void fixOpenFile() {
 		// delete file if possible
-		String dbFilename = "E:/Glenn/CSUMB/fall18/DB/temp3.txt";
+		String dbFilename = "DBfile.txt";
 		File file = new File(dbFilename);
 		file.delete();
 	}
@@ -63,7 +63,7 @@ class HeapDBTest {
 		// test insert, delete, and lookup operations
 		
 		fixOpenFile();
-		String dbFilename = "E:/Glenn/CSUMB/fall18/DB/temp3.txt";
+		String dbFilename = "DBfile.txt";
 		
 		Record rec1 = createTestRecord(1,2,3);
 		Record rec2 = createTestRecord(2,3,4);
@@ -95,7 +95,7 @@ class HeapDBTest {
 	void testLookupTime() {
 		// compare time to lookup records with/without an index
 		fixOpenFile();
-		String dbFilename = "E:/Glenn/CSUMB/fall18/DB/temp3.txt";
+		String dbFilename = "DBfile.txt";
 		
 		// create a new DB; use index to speed inserts
 		Record rec = createTestRecord(0,1,2);
@@ -149,7 +149,7 @@ class HeapDBTest {
 		Record rec4 = createTestRecord(4,5,6);
 
 		// create a small DB
-		String dbFilename = "E:/Glenn/CSUMB/fall18/DB/temp3.txt";
+		String dbFilename = "DBfile.txt";
 		HeapDB db = new HeapDB(dbFilename, rec1.getSchema());
 		db.insert(rec1);
 		db.insert(rec2);
@@ -167,7 +167,7 @@ class HeapDBTest {
 		// test lookup operations on non-key fields
 		
 		fixOpenFile();
-		String dbFilename = "E:/Glenn/CSUMB/fall18/DB/temp3.txt";
+		String dbFilename = "DBfile.txt";
 		
 		// create a new DB; use index on primary key to speed inserts
 		rand = new Random(42);  // set seed for repeatability
@@ -211,7 +211,7 @@ class HeapDBTest {
 		
 		// create a new DB
 		fixOpenFile();
-		String dbFilename = "E:/Glenn/CSUMB/fall18/DB/temp3.txt";
+		String dbFilename = "DBfile.txt";
 		rand = new Random(42);  // set seed for repeatability
 		Record rec = createTestRecord(0,1,2);
 		HeapDB db = new HeapDB(dbFilename, rec.getSchema());
