@@ -207,8 +207,14 @@ public class HeapDB implements DB, Iterable<Record>{
 					
 					// index maintenance
 					// YOUR CODE HERE
-					
-					return true;
+
+
+//					if(getFieldIndex(String record) != NULL) {
+//
+//						System.out.println(record);
+//					}
+//
+//					return true;
 				}
 			}
 		}
@@ -250,6 +256,7 @@ public class HeapDB implements DB, Iterable<Record>{
 							
 							// index maintenance
 							// YOUR CODE HERE
+
 
 							return true;
 						}
