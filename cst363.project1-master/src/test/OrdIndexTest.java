@@ -73,8 +73,11 @@ class OrdIndexTest {
 	@Test
 	void testDeleteLookup() {
 		idx.insert(2, 1);
+		System.out.println(idx);
 		List<Integer> result = idx.lookup(2);
 		List<Integer> expected = Arrays.asList(1,2,3);
+		System.out.println(result);
+		System.out.println(expected);
 		assertTrue(result.size() == 3 && result.containsAll(expected));
 
 		idx.delete(2, 1);

@@ -30,18 +30,24 @@ public class OrdIndex implements DBIndex {
 	@Override
 	public List<Integer> lookup(int key) {
 		List<Integer> ans = new ArrayList<>();
-		ArrayList<Pair<Integer,Integer>> tableCopy = table;
+		ArrayList<Pair<Integer,Integer>> tableCopy = new ArrayList<>(table);
 		boolean found = false;
 		int index = 0;
+
 		do{
 			found = false;
 			index = Bsearch(tableCopy, 0, tableCopy.size()-1, key);
+
 			if(index != -1) {
-				ans.add(tableCopy.get(index).getValue());
+				if(!ans.contains(tableCopy.get(index).getValue()))
+				{
+					ans.add(tableCopy.get(index).getValue());
+				}
 				tableCopy.remove(tableCopy.get(index));
 				found = true;
 			}
-		}while(found == true);
+		}
+		while(found == true);
 		Collections.sort(ans);
 		return ans;
 	}
@@ -52,35 +58,37 @@ public class OrdIndex implements DBIndex {
 
 		if(table.isEmpty()){
 			table.add(toInsert);
+			return;
 		}
-		else{
-			boolean inserted = false;
-			int index = 0;
-			for(int i = 0; i < table.size();i++){
-				if(table.get(i).getKey() == toInsert.getKey()) {
-					if(table.get(i).getValue() <= toInsert.getValue()) {
-						index = i+1;
-					}
-					if(toInsert.getValue() <= table.get(i).getValue()) {
 
-						table.add(index,toInsert);
-						inserted = true;
-						break;
-					}
-				}
-				if(table.get(i).getKey() <= toInsert.getKey()) {
+		boolean inserted = false;
+		int index = 0;
+
+		for(int i = 0; i < table.size();i++){
+			if(table.get(i).getKey() == toInsert.getKey()) {
+				if(table.get(i).getValue() <= toInsert.getValue()) {
 					index = i+1;
 				}
-				if(toInsert.getKey() <= table.get(i).getKey()) {
+				if(toInsert.getValue() <= table.get(i).getValue()) {
 
 					table.add(index,toInsert);
 					inserted = true;
 					break;
 				}
 			}
-			if(!inserted)
+			if(table.get(i).getKey() <= toInsert.getKey()) {
+				index = i+1;
+			}
+			if(toInsert.getKey() <= table.get(i).getKey()) {
+
 				table.add(index,toInsert);
+				inserted = true;
+				break;
+			}
 		}
+		if(!inserted)
+			table.add(index,toInsert);
+
 	}
 
 	@Override
